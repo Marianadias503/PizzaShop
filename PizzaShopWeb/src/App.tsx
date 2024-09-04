@@ -1,6 +1,8 @@
 
-import { Button } from './components/ui/button'
+import { RouterProvider } from 'react-router-dom'
+
 import './index.css'
+import { router } from './Router'
 
 export function App() {
   
@@ -8,8 +10,7 @@ export function App() {
   return (
    
    <div className="flex h-screen items-center justify-center ">
-
-      <Button>Enviar</Button>
+        <RouterProvider router={router}/>
    </div>
   )
 }
