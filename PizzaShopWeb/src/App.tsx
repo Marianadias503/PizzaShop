@@ -10,7 +10,6 @@ export function App() {
    <div className="flex justify-center items-center h-screen">
 
       <Button>Enviar</Button>
-
    </div>
   )
 }
