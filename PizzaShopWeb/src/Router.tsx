@@ -4,6 +4,7 @@ import { AppLayout } from './pages/_layouts/app'
 import { Dashboard } from './pages/app/dashboard'
 import { AuthLayout } from './pages/_layouts/auth'
 import { SignIn } from './pages/auth/sign-in'
+import { SignUp } from './pages/auth/sign-up'
 //import { Dashboard } from './pages/app/dashboard'
 //import { SignIn } from './pages/auth/sign-in'
 
@@ -23,10 +24,11 @@ export const router = createBrowserRouter([
     path:'/',
     element: <AuthLayout/>,
 
-    children:[{ //sub-rota, como o AppLayout e o Dashboard possuem o mesmo 'patch' só será mostrado o que foi definido primeiro, então para mostrar mais conteudo, precisar ter uma sub-rota.
-        path:'/sign-in',
-        element: <SignIn/>,
-    }]
+    children:[ //sub-rota, como o AppLayout e o Dashboard possuem o mesmo 'patch' só será mostrado o que foi definido primeiro, então para mostrar mais conteudo, precisar ter uma sub-rota.
+        {path:'/sign-in', element: <SignIn/>,},
+        {path:'/sign-up', element: <SignUp/>,}
+        
+   ]
 }
 
 
