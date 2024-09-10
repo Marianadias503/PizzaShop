@@ -2,8 +2,34 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Helmet } from "react-helmet-async"
+import {useForm} from 'react-hook-form';
+import {z} from 'zod';
+
+
+const sigInForm = z.object({ //estrutura do zod
+
+    email: z.string().email(),
+
+})
+
+type SignInForm = z.infer<typeof sigInForm> // converte a estrutura do zod para tipagem do JavaScript
+
+
+
+
 
 export function SignIn(){
+
+const {register, handleSubmit, formState: {  isSubmitting }} = useForm<SignInForm>();
+
+async function handleSignIn(data:SignInForm){ //Criando uma função para não permitir que o usuário clique em 'acessar painel' antes de realizar o primeiro envio
+                                              // a função handleSignIn usa como parâmetro o SignInForm, que é a conversão da constante 'signInForm' que recebe os emails digitados          
+    console.log(data)
+
+    await new Promise ((resolve)=> setTimeout(resolve,2000))
+}
+
+
     return(
         <>
         <Helmet title="Login" />
@@ -19,12 +45,12 @@ export function SignIn(){
                  </p>
                 </div>
 
-               <form className="space-y-4">
+               <form onSubmit={handleSubmit (handleSignIn)} className="space-y-4"> {/*formulario fica desabilitado quando o usuário clicar em 'acessar painel */ }
                 <div className="space-y-2">
                     <Label htmlFor="email"> Seu e-mail </Label>
-                    <Input id="email"></Input>
+                    <Input id="email" type="email" {...register('email')}></Input>
                 </div>
-                <Button className="w-full" type="submit"> Acessar painel </Button>
+                <Button className="w-full" type="submit" disabled={isSubmitting}> Acessar painel </Button>
                </form>
 
                

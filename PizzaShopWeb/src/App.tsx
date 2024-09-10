@@ -12,7 +12,7 @@ export function App() {
    <div className="flex h-screen items-center justify-center ">
     <HelmetProvider>
       <Helmet titleTemplate='%s | pizza.shop' />
-    <RouterProvider router={router}/>
+      <RouterProvider router={router}/>
     </HelmetProvider>
         
    </div>
