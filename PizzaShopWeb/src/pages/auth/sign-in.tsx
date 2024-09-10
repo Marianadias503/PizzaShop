@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Helmet } from "react-helmet-async"
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
+import { toast } from 'sonner'
 
 
 const sigInForm = z.object({ //estrutura do zod
@@ -23,10 +24,23 @@ export function SignIn(){
 const {register, handleSubmit, formState: {  isSubmitting }} = useForm<SignInForm>();
 
 async function handleSignIn(data:SignInForm){ //Criando uma função para não permitir que o usuário clique em 'acessar painel' antes de realizar o primeiro envio
-                                              // a função handleSignIn usa como parâmetro o SignInForm, que é a conversão da constante 'signInForm' que recebe os emails digitados          
-    console.log(data)
+                                                // a função handleSignIn usa como parâmetro o SignInForm, que é a conversão da constante 'signInForm' que recebe os emails digitados          
+           try{
 
-    await new Promise ((resolve)=> setTimeout(resolve,2000))
+            console.log(data)
+            
+            await new Promise ((resolve)=> setTimeout(resolve,2000))
+            toast.success('Enviamos um link de autenticação para seu email.',{
+                action:{
+                    label:'Reenviar',
+                    onClick:() => handleSignIn(data),
+                }
+            })
+
+           } catch{
+            toast.error('Credencias inválidas.')
+           }    
+    
 }
 
 
